@@ -21,19 +21,24 @@ function getPlayerChoice() {
   return prompt("Write rock, paper or scissors");
 }
 
-function playRound(playerSelection, computerSelection) {
+function playRound(playerChoice, computerChoice) {
   // return something like "You Lose! Paper beats Rock"
   // make playerSelection case insensitive
 
-  playerSelection = playerSelection.toLowerCase();
+  playerChoice = playerChoice.toLowerCase();
 
-  if ((playerSelection === "rock" && computerSelection === "scissors") || (playerSelection === "paper" && computerSelection === "rock" || (playerSelection === "scissors" && computerSelection === "paper"))) {
+  document.querySelector("#player-choice").textContent = playerChoice;
+  document.querySelector("#computer-choice").textContent = computerChoice;
+  
+  const result = document.querySelector("#result");
+
+  if ((playerChoice === "rock" && computerChoice === "scissors") || (playerChoice === "paper" && computerChoice === "rock" || (playerChoice === "scissors" && computerChoice === "paper"))) {
     playerWinCount++;
-    console.log(`You win, ${playerSelection} beats ${computerSelection}`);
-  } else if (playerSelection === computerSelection) {
-    console.log("It's a tie");
+    result.textContent = "You win"
+  } else if (playerChoice === computerChoice) {
+    result.textContent = "It's a tie"
   } else {
     computerWinCount++;
-    console.log(`You lose, ${computerSelection} beats ${playerSelection}`);
+    result.textContent = "You lose"
   }
 }
