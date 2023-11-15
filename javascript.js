@@ -1,5 +1,5 @@
-let playerWinCount;
-let computerWinCount;
+let playerWinCount = 0;
+let computerWinCount = 0;
 
 const buttons = document.querySelectorAll("button");
 
@@ -31,14 +31,23 @@ function playRound(playerChoice, computerChoice) {
   document.querySelector("#computer-choice").textContent = computerChoice;
   
   const result = document.querySelector("#result");
+  const playerCountSelector = document.querySelector("#player-win-count");
+  const computerCountSelector = document.querySelector("#computer-win-count");
+  
 
   if ((playerChoice === "rock" && computerChoice === "scissors") || (playerChoice === "paper" && computerChoice === "rock" || (playerChoice === "scissors" && computerChoice === "paper"))) {
-    playerWinCount++;
+    playerCountSelector.textContent = ++playerWinCount;
     result.textContent = "You win"
   } else if (playerChoice === computerChoice) {
     result.textContent = "It's a tie"
   } else {
-    computerWinCount++;
+    computerCountSelector.textContent = ++computerWinCount;
     result.textContent = "You lose"
+  }
+
+  if (playerWinCount === 5) {
+    result.textContent = "You won 5 times. You are the winner of the game!"
+  } else if (computerWinCount === 5) {
+    result.textContent = "Computer won 5 times. Computer is the winner of the game"
   }
 }
