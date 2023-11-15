@@ -1,7 +1,14 @@
 let playerWinCount;
 let computerWinCount;
 
-game();
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach((button) => {
+  button.addEventListener("click", (event) => {
+    const playerChoice = event.target.textContent;
+    playRound(playerChoice, getComputerChoice());
+  })
+})
 
 function getComputerChoice() {
   // randomly return rock, paper or scissors
@@ -22,28 +29,11 @@ function playRound(playerSelection, computerSelection) {
 
   if ((playerSelection === "rock" && computerSelection === "scissors") || (playerSelection === "paper" && computerSelection === "rock" || (playerSelection === "scissors" && computerSelection === "paper"))) {
     playerWinCount++;
-    return `You win, ${playerSelection} beats ${computerSelection}`;
+    console.log(`You win, ${playerSelection} beats ${computerSelection}`);
   } else if (playerSelection === computerSelection) {
-    return "It's a tie";
+    console.log("It's a tie");
   } else {
     computerWinCount++;
-    return `You lose, ${computerSelection} beats ${playerSelection}`;
-  }
-}
-
-function game() {
-  //play 5 rounds to report a winner at the end with a score
-  playerWinCount = 0;
-  computerWinCount = 0;
-  for (let i = 0; i < 5; i++) {
-    console.log(playRound(getPlayerChoice(), getComputerChoice()));
-  }
-
-  if (playerWinCount > computerWinCount) {
-    console.log("You are the winner");
-  } else if (playerWinCount < computerWinCount) {
-    console.log("You are the loser");
-  } else {
-    console.log("It's a tie");
+    console.log(`You lose, ${computerSelection} beats ${playerSelection}`);
   }
 }
